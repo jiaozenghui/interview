@@ -39,10 +39,10 @@ def list():
 
 @app.route("/add", methods=["POST", "GET"])
 def add():
-    if request.method == "POST":
-        name = request.form.get("name")
-        gender = request.form.get("gender")
 
+    name = request.form.get("name")
+    gender = request.form.get("gender")
+    if request.method == "POST":
         new_task = User(name=name,gender= gender )
         try:
             db.session.add(new_task)
@@ -51,8 +51,7 @@ def add():
         except:
             return res(None, "err", 1)
     else:
-        task_content = request.args.get("content")
-        new_task = User(content=task_content)
+        new_task = User(name=name,gender= gender)
         try:
             db.session.add(new_task)
             db.session.commit()
