@@ -68,8 +68,11 @@ const getTableData = () => {
 		size:10
 	}
 	userApi.getUsers(params).then((res:any)=>{
-		state.tableData.data = data;
-		state.tableData.total = state.tableData.data.length;
+		if (res && res.status ==0) {
+			state.tableData.data = data;
+			state.tableData.total = state.tableData.data.length;
+		}
+
 	});
 };
 
