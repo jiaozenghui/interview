@@ -41,8 +41,8 @@ def list():
 @app.route("/api/add", methods=["POST", "GET"])
 def add():
 
-    name = request.form["name"]
-    gender = request.form["gender"]
+    name = request.POST.get("name")
+    gender = request.POST.get("gender")
     print(name)
     if request.method == "POST":
         new_user = User(name=name,gender= gender )
