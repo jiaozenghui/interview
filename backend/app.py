@@ -43,19 +43,19 @@ def add():
 
     name = request.form["name"]
     gender = request.form["gender"]
-    print(request.form)
+    print(name)
     if request.method == "POST":
-        new_task = User(name=name,gender= gender )
+        new_user = User(name=name,gender= gender )
         try:
-            db.session.add(new_task)
+            db.session.add(new_user)
             db.session.commit()
             return res(None, "ok", 0)
         except Exception as e:
             return res(None, "err", 1)
     else:
-        new_task = User(name=name,gender= gender)
+        new_user = User(name=name,gender= gender)
         try:
-            db.session.add(new_task)
+            db.session.add(new_user)
             db.session.commit()
             return res(None, "ok", 0)
         except:
