@@ -13,8 +13,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     gender = db.Column(db.String(10), unique=False, nullable=False)
-    create_at = db.Column(db.DateTime(), unique=False, nullable=False, default=datetime.utcnow)
-    update_at = db.Column(db.DateTime(), unique=False, nullable=False, default=datetime.utcnow)
+    create_at = db.Column(db.DateTime, unique=False, nullable=False, default=datetime.utcnow)
+    update_at = db.Column(db.DateTime, unique=False, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
         return '<User %r>' % self.name
