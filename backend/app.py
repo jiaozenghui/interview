@@ -28,10 +28,9 @@ def info():
     return res(task, "ok", 0)
 
 
-@app.route("/list", methods=['GET'])
+@app.route("/api/list", methods=['GET'])
 def list():
     page = request.args.get("page")
-    print(page)
     size = request.args.get("size")
     print(size)
     tasks = User.query.order_by(User.update_at).all()
