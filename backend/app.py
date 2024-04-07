@@ -18,6 +18,16 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.name
+
+  def dictRepr(self):
+        info ={
+            "name": self.name,
+            "gender":self.gender,
+            "create_at":self.create_at,
+            "update_at": self.update_at
+        }
+        return info 
+
  
 def model_to_dict(model):
     return {col: value for col, value in vars(model).items()}
@@ -35,7 +45,7 @@ def list():
     size = request.args.get("size")
     print(size)
     users = User.query.order_by(User.update_at).all()
-    user_dict_list = [user.to_dict() for user in users]
+    user_dict_list = [user.dictRepr() for user in users]
 
     return res(user_dict_list, "ok", 0)
 
