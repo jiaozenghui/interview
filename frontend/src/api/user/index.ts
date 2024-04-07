@@ -12,9 +12,9 @@ export function UserApi() {
 				data,
 			});
 		},
-		getDevices: (params?: object) => {
+		getUsers: (params?: object) => {
 			return request({
-				url: '/nebula/vap/api/v1/device/query',
+				url: '/api/list',
 				method: 'get',
 				params,
 			});

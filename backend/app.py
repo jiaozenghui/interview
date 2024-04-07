@@ -33,8 +33,8 @@ def list():
     page = request.args.get("page")
     size = request.args.get("size")
     print(size)
-    tasks = User.query.order_by(User.update_at).all()
-    return res(tasks, "ok", 0)
+    users = User.query.order_by(User.update_at).all()
+    return res(users, "ok", 0)
 
 
 @app.route("/api/add", methods=["POST", "GET"])
