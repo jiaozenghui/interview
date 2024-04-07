@@ -31,8 +31,6 @@
     setup(props, { emit, attrs }) {
       // 当前页
       const currentPage = ref(attrs.currentPage)
-      // 计算总页数
-      debugger
       const pages = computed(() => Math.ceil(props.total / props.pagesize))
       // 页码显示组合
       const list = computed(() => {

@@ -76,7 +76,7 @@ def add():
             return res(None, "err", 1)
 
 
-@app.route("/update/<int:id>", methods=["PUT"])
+@app.route("/api/update/<int:id>", methods=["PUT"])
 def update(id):
     user = User.query.get_or_404(id)
     data = request.get_json()
