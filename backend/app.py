@@ -19,14 +19,14 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.name
 
-  def dictRepr(self):
-        info ={
-            "name": self.name,
-            "gender":self.gender,
-            "create_at":self.create_at,
-            "update_at": self.update_at
-        }
-        return info 
+    def dictRepr(self):
+            info ={
+                "name": self.name,
+                "gender":self.gender,
+                "create_at":self.create_at,
+                "update_at": self.update_at
+            }
+            return info 
 
  
 def model_to_dict(model):
