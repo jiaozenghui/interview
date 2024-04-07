@@ -30,6 +30,7 @@
       </tbody>
     </table>
 	<Pagination 
+	class="mt-6"
 	:total="state.tableData.total" 
 	:pagesize="state.tableData.param.pageSize" 
 	:currentPage="state.tableData.param.pageNum" 

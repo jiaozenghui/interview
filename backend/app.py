@@ -45,7 +45,7 @@ def list():
     page = request.args.get('page', 1, type = int)
     size = request.args.get('size', 10, type = int)
     print(size)
-    pagination = User.query.paginate(page= page, per_page=size)
+    pagination = User.query.order_by(User.update_at.desc()).paginate(page= page, per_page=size)
     print(pagination)
     user_dict_list = [user.dictRepr() for user in pagination.items]
     total = pagination.total
