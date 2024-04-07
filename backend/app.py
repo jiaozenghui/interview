@@ -40,9 +40,9 @@ def list():
 
 @app.route("/api/add", methods=["POST", "GET"])
 def add():
-
-    name = request.form["name"]
-    gender = request.form["gender"]
+    data = request.get_json()
+    name = data.get("name")
+    gender = data.get("gender")
     if request.method == "POST":
         new_user = User(name=name,gender= gender )
         try:
