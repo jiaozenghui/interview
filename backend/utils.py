@@ -31,15 +31,18 @@ def serializer(obj):
     try:
         # 如果对象本身就是可以序列化为JSON的类型，则直接返回
         if isinstance(obj, (str, int, float, bool, list, tuple, dict)):
+            print('test0')
             return obj
         # 如果对象是ORM对象，则将其转换为字典并返回
         elif isinstance(obj.__class__, DeclarativeMeta):
-            print('tetts')
+            print('test1')
             return {c.name: getattr(obj, c.name) for c in obj.__table__.columns}
         # 如果对象实现了__dict__方法，则将其转换为字典并返回
         elif hasattr(obj, '__dict__'):
+            print('test3')
             return obj.__dict__
         else:
+            print('6')
             raise SerializationError(code=500, message="Cannot serializer obj")
     except Exception as e:
         raise SerializationError(code=500, message=str(e))
