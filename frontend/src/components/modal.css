@@ -1,5 +1,6 @@
 .close-img{
-  width: 30px;margin-right: 12px; margin-top: 12px; cursor: pointer;
+  width: 20px;
+  cursor: pointer;
 }
 .modal-backdrop { 
     position: fixed; 
@@ -26,7 +27,7 @@
     border-bottom: 1px solid #eee; 
     color: #313131; 
     justify-content: space-between;
-    padding-left: 15px; 
+    padding: 15px;
     display: flex; 
 } 
 .modal-footer { 
@@ -37,7 +38,7 @@
 } 
 .modal-body { 
     position: relative; 
-    padding: 20px 10px; 
+    padding: 20px; 
 }
 .btn-close, .btn-confirm {    
     border-radius: 8px;

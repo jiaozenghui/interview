@@ -3,7 +3,7 @@
      <div class="modal" >
         <div class="modal-header">
           <div><h3>{{title}}</h3></div>
-          <div class="close-img" @click="confirmModal(false)">
+          <div class="close-img" @click="onCancel(false)">
             X
           </div>
         </div>
@@ -11,7 +11,7 @@
           <!-- 插槽 官方文档：https://cn.vuejs.org/v2/guide/components-slots.html -->
           <slot />
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" v-if="footerShow">
             <button type="button" class="btn-close" @click="confirmModal(false)">关闭</button>
             <button type="button" class="btn-confirm" @click="confirmModal(true)">确认</button>
         </div>
@@ -37,6 +37,10 @@ export default {
         type: Boolean,
         default: false, 
     },
+    footerShow: {
+      type: Boolean,
+        default: false, 
+    },
     title: {
         type: String,
         default: '提示', 
@@ -50,14 +54,19 @@ export default {
         modalShow: props.modalShow
     });
  
+    const onCancel = (sign:boolean) => {
+      // 子组件向父组件传值 
+      content.emit('onCancel', sign);
+    }
+
     const confirmModal = (sign:boolean) => {
       // 子组件向父组件传值 
       content.emit('confirmModal', sign);
-    }
- 
+    } 
     const dataRef = toRefs(data);
     return {
       confirmModal,
+      onCancel,
       ...dataRef
     }
   },

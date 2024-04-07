@@ -38,7 +38,7 @@ def list():
     return res(tasks, "ok", 0)
 
 
-@app.route("/add", methods=["POST", "GET"])
+@app.route("/api/add", methods=["POST", "GET"])
 def add():
 
     name = request.form.get("name")

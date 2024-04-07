@@ -19,7 +19,7 @@ export default defineConfig({
   },
   server:{
     proxy:{
-      '/api': 'https://api.*.com/'
+      '/api': 'http://111.229.109.174:5001'
     }
   }
 })
