@@ -51,7 +51,7 @@ def add():
             db.session.commit()
             return res(None, "ok", 0)
         except Exception as e:
-            return res(None, "err", 1)
+            return res(None, e, 1)
     else:
         new_user = User(name=name,gender= gender)
         try:
