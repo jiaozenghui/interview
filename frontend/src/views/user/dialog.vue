@@ -33,7 +33,7 @@
               </div>  
               <div class="mt-6 flex items-center justify-end gap-x-6 ">
                 <button type="button" @click="onCancel" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                <button type="submit"  @click="onSubmit" class="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline bg-sky-300 hover:bg-sky-400">
+                <button type="submit"  @click="onSubmit" class="rounded-md  px-3 py-2 text-sm  hover:bg-indigo-500 focus-visible:outline bg-sky-300 hover:bg-sky-400">
                     {{ state.dialog.submitTxt }}
                 </button>
               </div>
@@ -46,6 +46,7 @@
 import { reactive, ref } from 'vue';
 import { UserApi } from "@/api/user/index";
 import Modal from "./../../components/Modal.vue";
+import Message from '@/components/Message'
 // 定义子组件向父组件传值/事件
 const emit = defineEmits(['refresh']);
 
@@ -78,6 +79,7 @@ const state = reactive({
 
 // 打开弹窗
 const openDialog = (type: string, row: RowUserType) => {
+	state.dialog.type = type;
 	state.userForm = {
 		name: '',
         gender: ''
@@ -144,14 +146,28 @@ const onSubmit = (e:any) => {
 	
 	if (state.dialog.type === 'add') {
 		userApi.addUser(state.userForm).then((res:any)=>{
-			emit('refresh');
+			if (res.status ==0) {
+				Message({ type: 'success', text: 'Successfully added' })
+				emit('refresh');
+			} else {
+				Message({ type: 'error', text: 'Add Failed' })
+			}
+		},()=>{
+			Message({ type: 'error', text: 'Add Failed' })
 		});
 	 } else {
 		let params = state.userForm;
 		let id = state.userForm.id;
 		delete state.userForm.id
 		userApi.updateUser(id, params).then((res:any)=>{
-			emit('refresh');
+			if (res.status ==0) {
+				Message({type: 'success', text: 'Successfully updated' })
+				emit('refresh');
+			} else {
+				Message({ type: 'error', text: 'Update Failed' })
+			}
+		}).error(()=>{
+			Message({ type: 'error', text: 'Update Failed' })
 		});
 	 }
 };

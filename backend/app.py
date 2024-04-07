@@ -84,6 +84,7 @@ def update(id):
     if request.method == "PUT":
         user.name = data.get("name")
         user.gender = data.get("gender")
+        user.update_at = datetime.utcnow
         try:
             db.session.commit()
             return res(None, "ok", 0)
