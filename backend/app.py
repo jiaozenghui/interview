@@ -49,8 +49,8 @@ def add():
             db.session.add(new_task)
             db.session.commit()
             return res(None, "ok", 0)
-        except:
-            return res(None, "err", 1)
+        except Exception as e:
+            return res(None, e, 1)
     else:
         new_task = User(name=name,gender= gender)
         try:

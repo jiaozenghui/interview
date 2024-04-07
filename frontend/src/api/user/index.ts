@@ -7,7 +7,7 @@ export function UserApi() {
 	return {
 		addUser: (data: UserInfo) => {
 			return request({
-				url: '/api/v1/fullstructure/synthesize/features/recognition',
+				url: '/api/add',
 				method: 'post',
 				data,
 			});

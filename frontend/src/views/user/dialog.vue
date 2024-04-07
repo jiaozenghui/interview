@@ -126,8 +126,8 @@ const nameChange = ()=>{
 
 // 提交
 const onSubmit = (e:any) => {
-	let formValidate = checkForm(e);
-	if (!formValidate) return;
+	checkForm(e);
+	if (!state.formValidate) return;
 	closeDialog();
 	
 	// if (state.dialog.type === 'add') { }
