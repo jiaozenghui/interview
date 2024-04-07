@@ -42,7 +42,7 @@ def info():
 @app.route("/api/list", methods=['GET'])
 def list():
     page = int(request.args.get("page"))
-    size = int(request.args.get("size"))
+    size = request.args.get("size")
     print(size)
     pagination = User.query.order_by(User.update_at).paginate(page, per_page=size, error_out = False)
 
