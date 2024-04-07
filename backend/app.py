@@ -36,8 +36,8 @@ def model_to_dict(model):
 @app.route("/info", methods=["GET"])
 def info():
     id = request.args.get("id")
-    task = User.query.filter(User.id == id).first()
-    return res(task, "ok", 0)
+    user = User.query.filter(User.id == id).first()
+    return res(user, "ok", 0)
 
 
 @app.route("/api/list", methods=['GET'])
@@ -76,18 +76,21 @@ def add():
             return res(None, "err", 1)
 
 
-@app.route("/update/<int:id>", methods=["POST"])
+@app.route("/update/<int:id>", methods=["PUT"])
 def update(id):
-    task = User.query.get_or_404(id)
-    if request.method == "POST":
-        task.content = request.form["task"]
+    user = User.query.get_or_404(id)
+    data = request.get_json()
+
+    if request.method == "PUT":
+        user.name = data.get("name")
+        user.gender = data.get("gender")
         try:
             db.session.commit()
             return res(None, "ok", 0)
         except:
             return res(None, "ok", 1)
     else:
-        return res(None, "不支持GET", 2)
+        return res(None, "Not Support GET", 2)
 
 
 

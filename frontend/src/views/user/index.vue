@@ -13,9 +13,9 @@
         </tr>
       </thead>
       <tbody class="bg-white dark:bg-slate-800">
-        <tr v-for="(o, index) in state.tableData.data">
+        <tr v-for="o in state.tableData.data">
 			<td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-				{{ index+1 }}
+				{{ o.id }}
 			  </td>
           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
 			{{ o.name }}
@@ -24,18 +24,19 @@
 			{{ o.gender }}
 		  </td>
           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-            <button class="p-2 bg-sky-300 hover:bg-sky-400">Edit</button>
+            <button @click="onOpenEditUser('edit', o)" class="p-2 bg-sky-300 hover:bg-sky-400">Edit</button>
           </td>
         </tr>
       </tbody>
     </table>
 	<Pagination 
 	class="mt-6"
+	ref="paginationRef"
 	:total="state.tableData.total" 
 	:pagesize="state.tableData.param.pageSize" 
 	:currentPage="state.tableData.param.pageNum" 
-	@change-page="getTableData" />
-    <UserDialog ref="userDialogRef" @refresh="getTableData()" />
+	@change-page="onHandleCurrentChange" />
+    <UserDialog ref="userDialogRef" @refresh="refresh()" />
   </div>
 
 </template>
@@ -45,6 +46,7 @@ import { defineAsyncComponent, reactive, onMounted, ref } from 'vue';
 import { UserApi } from "@/api/user/index";
 import Pagination from "@/components/Pagination.vue";
 const userDialogRef = ref();
+const paginationRef = ref();
 const userApi = UserApi();
 const state = reactive<any>({
 	tableData: {
@@ -69,12 +71,17 @@ const onOpenEditUser = (type: string, row: RowUserType) => {
 	userDialogRef.value.openDialog(type, row);
 };
 
+const refresh = ()=>{
+	paginationRef.value.currentPage = 1;
+	state.tableData.param.pageNum = 1;
+	getTableData();
+}
 
 // 初始化表格数据
 const getTableData = () => {
 	let params = {
-		page:1,
-		size:10
+		page:state.tableData.param.pageNum,
+		size:state.tableData.param.pageSize
 	}
 	userApi.getUsers(params).then((res:any)=>{
 		if (res && res.status ==0) {

@@ -32,13 +32,14 @@
       // 当前页
       const currentPage = ref(attrs.currentPage)
       // 计算总页数
+      debugger
       const pages = computed(() => Math.ceil(props.total / props.pagesize))
       // 页码显示组合
       const list = computed(() => {
         const result = []
         // 总页数小于等于5页的时候
-        if (pages <= 5) {
-          for (let i = 1; i <= pages; i++) {
+        if (pages.value <= 5) {
+          for (let i = 1; i <= pages.value; i++) {
             result.push(i)
           }
         } else {
@@ -90,12 +91,12 @@
     margin-right: 10px;
   }
   .my-pagination > a:hover {
-    color:aquamarine;
+    color:#7dd3fc;
   }
   .my-pagination > a.active {
-    background: aquamarine;
+    background: #7dd3fc;
     color: #fff;
-    border-color: aquamarine;
+    border-color: #7dd3fc;
   }
   .my-pagination > a.disabled {
     cursor: not-allowed;

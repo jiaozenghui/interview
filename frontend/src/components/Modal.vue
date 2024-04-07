@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer" v-if="footerShow">
             <button type="button" class="btn-close" @click="confirmModal(false)">关闭</button>
-            <button type="button" class="btn-confirm" @click="confirmModal(true)">确认</button>
+            <button type="button" class="btn-confirm bg-sky-300 hover:bg-sky-400" @click="confirmModal(true)">确认</button>
         </div>
     </div>
  

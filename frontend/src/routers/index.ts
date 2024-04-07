@@ -9,10 +9,6 @@ export const router = createRouter({
     {
       path: '/user',
       component: UserList
-    },
-    {
-      path: '/edit',
-      component: Edit
     }
   ]
 })

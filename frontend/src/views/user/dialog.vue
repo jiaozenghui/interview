@@ -33,7 +33,7 @@
               </div>  
               <div class="mt-6 flex items-center justify-end gap-x-6 ">
                 <button type="button" @click="onCancel" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                <button type="submit"  @click="onSubmit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <button type="submit"  @click="onSubmit" class="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline bg-sky-300 hover:bg-sky-400">
                     {{ state.dialog.submitTxt }}
                 </button>
               </div>
@@ -78,8 +78,20 @@ const state = reactive({
 
 // 打开弹窗
 const openDialog = (type: string, row: RowUserType) => {
+	state.userForm = {
+		name: '',
+        gender: ''
+	}
+	state.errors = {
+		name: {
+			msg: 'Name Required'
+		},
+		gender: {
+			msg: 'Gender Required'
+		}
+	}
 	if (type === 'edit') {
-		state.userForm = row;
+		state.userForm = JSON.parse(JSON.stringify(row));
 		state.dialog.title = 'Update User';
 	} else {
 		state.dialog.title = 'Add User';
@@ -130,13 +142,18 @@ const onSubmit = (e:any) => {
 	if (!state.formValidate) return;
 	closeDialog();
 	
-	// if (state.dialog.type === 'add') { }
-
-	userApi.addUser(state.userForm).then((res:any)=>{
-		console.log('test')
-		emit('refresh');
-	});
-
+	if (state.dialog.type === 'add') {
+		userApi.addUser(state.userForm).then((res:any)=>{
+			emit('refresh');
+		});
+	 } else {
+		let params = state.userForm;
+		let id = state.userForm.id;
+		delete state.userForm.id
+		userApi.updateUser(id, params).then((res:any)=>{
+			emit('refresh');
+		});
+	 }
 };
 
 
