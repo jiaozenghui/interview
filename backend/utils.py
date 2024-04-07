@@ -34,6 +34,7 @@ def serializer(obj):
             return obj
         # 如果对象是ORM对象，则将其转换为字典并返回
         elif isinstance(obj.__class__, DeclarativeMeta):
+            print('tetts')
             return {c.name: getattr(obj, c.name) for c in obj.__table__.columns}
         # 如果对象实现了__dict__方法，则将其转换为字典并返回
         elif hasattr(obj, '__dict__'):
