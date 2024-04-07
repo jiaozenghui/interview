@@ -13,7 +13,10 @@
         </tr>
       </thead>
       <tbody class="bg-white dark:bg-slate-800">
-        <tr v-for="o in state.tableData.data">
+        <tr v-for="(o, index) in state.tableData.data">
+			<td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+				{{ index+1 }}
+			  </td>
           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
 			{{ o.name }}
 		  </td>
@@ -26,7 +29,11 @@
         </tr>
       </tbody>
     </table>
-
+	<Pagination 
+	:total="state.tableData.total" 
+	:pagesize="state.tableData.param.pageSize" 
+	:currentPage="state.tableData.param.pageNum" 
+	@change-page="getTableData" />
     <UserDialog ref="userDialogRef" @refresh="getTableData()" />
   </div>
 
@@ -35,6 +42,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, reactive, onMounted, ref } from 'vue';
 import { UserApi } from "@/api/user/index";
+import Pagination from "@/components/Pagination.vue";
 const userDialogRef = ref();
 const userApi = UserApi();
 const state = reactive<any>({
@@ -69,8 +77,8 @@ const getTableData = () => {
 	}
 	userApi.getUsers(params).then((res:any)=>{
 		if (res && res.status ==0) {
-			state.tableData.data = data;
-			state.tableData.total = state.tableData.data.length;
+			state.tableData.data = res.data.list;
+			state.tableData.total = res.data.total;
 		}
 
 	});

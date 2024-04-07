@@ -21,6 +21,7 @@ class User(db.Model):
 
     def dictRepr(self):
             info ={
+                "id": self.id,
                 "name": self.name,
                 "gender":self.gender,
                 "create_at":self.create_at,
