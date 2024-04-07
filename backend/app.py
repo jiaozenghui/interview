@@ -19,7 +19,8 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.name
  
-
+def model_to_dict(model):
+    return {col: value for col, value in vars(model).items()}
 
 @app.route("/info", methods=["GET"])
 def info():
@@ -34,7 +35,7 @@ def list():
     size = request.args.get("size")
     print(size)
     users = User.query.order_by(User.update_at).all()
-    user_dict_list = [user.to_dict() for user in users]
+    user_dict_list = [model_to_dict(user) for user in users]
 
     return res(user_dict_list, "ok", 0)
 
