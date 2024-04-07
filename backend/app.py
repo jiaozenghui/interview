@@ -16,6 +16,14 @@ class User(db.Model):
     create_at = db.Column(db.DateTime, unique=False, nullable=False, default=datetime.utcnow)
     update_at = db.Column(db.DateTime, unique=False, nullable=False, default=datetime.utcnow)
 
+    def __dict__(self):
+        return {
+            'name': self.name,
+            gender: self.gender,
+            create_at: self.create_at,
+            update_at: self.update_at
+        }
+
     def __repr__(self):
         return '<User %r>' % self.name
  
