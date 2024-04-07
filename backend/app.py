@@ -34,6 +34,7 @@ def list():
     size = request.args.get("size")
     print(size)
     users = User.query.order_by(User.update_at).all()
+    print(users)
     return res(users, "ok", 0)
 
 
