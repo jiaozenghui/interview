@@ -41,8 +41,8 @@ def list():
 @app.route("/api/add", methods=["POST", "GET"])
 def add():
 
-    name = request.form.get("name")
-    gender = request.form.get("gender")
+    name = request.form["name"]
+    gender = request.form["gender"]
     print(name)
     if request.method == "POST":
         new_task = User(name=name,gender= gender )
