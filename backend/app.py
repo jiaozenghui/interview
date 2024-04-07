@@ -42,12 +42,12 @@ def info():
 @app.route("/api/list", methods=['GET'])
 def list():
     page = int(request.args.get("page"))
-    size = request.args.get("size")
+    size = int(request.args.get("size"))
     print(size)
     pagination = User.query.order_by(User.update_at).paginate(page, per_page=size, error_out = False)
 
     user_dict_list = [user.dictRepr() for user in pagination.items]
-    total = pagination.total
+    total = pagination.pages
     return res({list:user_dict_list, total: total}, "ok", 0)
 
 
