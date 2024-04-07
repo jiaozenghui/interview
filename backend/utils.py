@@ -31,9 +31,6 @@ def serializer(obj):
     try:
         # 如果对象本身就是可以序列化为JSON的类型，则直接返回
         if isinstance(obj, (str, int, float, bool, list, tuple, dict)):
-            if isinstance(obj, list):
-                print('list test')
-                return {c.name: getattr(obj, c.name) for c in obj}
             return obj
         # 如果对象是ORM对象，则将其转换为字典并返回
         elif isinstance(obj.__class__, DeclarativeMeta):

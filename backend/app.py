@@ -34,8 +34,9 @@ def list():
     size = request.args.get("size")
     print(size)
     users = User.query.order_by(User.update_at).all()
-    print(users)
-    return res(users, "ok", 0)
+    user_dict_list = [user.to_dict() for user in users]
+
+    return res(user_dict_list, "ok", 0)
 
 
 @app.route("/api/add", methods=["POST", "GET"])
