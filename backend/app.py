@@ -43,7 +43,7 @@ def add():
 
     name = request.form.get("name")
     gender = request.form.get("gender")
-    print name
+    print(name)
     if request.method == "POST":
         new_task = User(name=name,gender= gender )
         try:
