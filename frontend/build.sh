@@ -24,7 +24,7 @@ else
    exit 
 fi
 
-cp -R nginx.conf /usr/local/nginx/conf
+cp -f nginx.conf /usr/local/nginx/conf
 if [ $? -eq 0 ];then
    echo "cp -R nginx.conf OK"
    cd ..
