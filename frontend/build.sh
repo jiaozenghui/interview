@@ -15,7 +15,7 @@ else
    exit 
 fi
 rm -rf ../../../dist
-makedir ../../../dist
+mkdir ../../../dist
 cp -R dist/* ../../../dist
 if [ $? -eq 0 ];then
    echo "cp dist OK"
