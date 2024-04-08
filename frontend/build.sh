@@ -26,7 +26,7 @@ fi
 
 rm -f /usr/local/nginx/conf/nginx.conf
 
-sudo cp  -f nginx.conf /usr/local/nginx/conf/nginx.conf
+sudo cp  -f /root/project/interview/frontend/nginx.conf /usr/local/nginx/conf/nginx.conf
 if [ $? -eq 0 ];then
    echo "cp -R nginx.conf OK"
    cd ..
