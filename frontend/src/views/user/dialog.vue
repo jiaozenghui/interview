@@ -43,19 +43,18 @@
 </template>
 
 <script setup lang="ts" name="userDialog">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { UserApi } from "@/api/user/index";
 import Modal from "./../../components/Modal.vue";
 import Message from '@/components/Message'
 // 定义子组件向父组件传值/事件
 const emit = defineEmits(['refresh']);
 
-// 定义变量内容
-const userDialogFormRef = ref();
 
 const userApi = UserApi();
 const state = reactive({
 	userForm: {
+		id: null,
 		name: '',
         gender: ''
 	},
@@ -78,9 +77,10 @@ const state = reactive({
 });
 
 // 打开弹窗
-const openDialog = (type: string, row: RowUserType) => {
+const openDialog = (type: string, row: any) => {
 	state.dialog.type = type;
 	state.userForm = {
+		id: null,
 		name: '',
         gender: ''
 	}
@@ -113,7 +113,7 @@ const onCancel = () => {
 	closeDialog();
 };
 
-const checkForm = (e:any, filed:any) => {
+const checkForm = (e:any, filed?:any) => {
 	e.preventDefault();
 	if (filed) {
 		state.errors[filed]['validate'] = !!state.userForm[filed];
@@ -134,10 +134,6 @@ const checkForm = (e:any, filed:any) => {
 
 }
 
-const nameChange = ()=>{
-
-}
-
 // 提交
 const onSubmit = (e:any) => {
 	checkForm(e);
@@ -145,6 +141,7 @@ const onSubmit = (e:any) => {
 	closeDialog();
 	
 	if (state.dialog.type === 'add') {
+		delete state.userForm.id
 		userApi.addUser(state.userForm).then((res:any)=>{
 			if (res.status ==0) {
 				Message({ type: 'success', text: 'Successfully added' })
@@ -166,7 +163,7 @@ const onSubmit = (e:any) => {
 			} else {
 				Message({ type: 'error', text: 'Update Failed' })
 			}
-		}).error(()=>{
+		}, ()=>{
 			Message({ type: 'error', text: 'Update Failed' })
 		});
 	 }

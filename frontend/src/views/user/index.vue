@@ -30,7 +30,7 @@
       </tbody>
     </table>
 	<Pagination 
-	class="mt-6"
+	class="mt-6 text-right"
 	ref="paginationRef"
 	:total="state.tableData.total" 
 	:pagesize="state.tableData.param.pageSize" 
@@ -67,7 +67,7 @@ const onOpenAddUser = (type: string) => {
 	userDialogRef.value.openDialog(type);
 };
 // 打开修改用户弹窗
-const onOpenEditUser = (type: string, row: RowUserType) => {
+const onOpenEditUser = (type: string, row: any) => {
 	userDialogRef.value.openDialog(type, row);
 };
 
@@ -92,11 +92,7 @@ const getTableData = () => {
 	});
 };
 
-// 分页改变
-const onHandleSizeChange = (val: number) => {
-	state.tableData.param.pageSize = val;
-	getTableData();
-};
+
 // 分页改变
 const onHandleCurrentChange = (val: number) => {
 	state.tableData.param.pageNum = val;
