@@ -54,10 +54,9 @@ const emit = defineEmits(['refresh']);
 const userApi = UserApi();
 const state = reactive({
 	userForm: {
-		id: null,
 		name: '',
         gender: ''
-	},
+	} as any,
 	dialog: {
 		isShowDialog: false,
         isShowFooter: false,
@@ -80,7 +79,6 @@ const state = reactive({
 const openDialog = (type: string, row: any) => {
 	state.dialog.type = type;
 	state.userForm = {
-		id: null,
 		name: '',
         gender: ''
 	}
