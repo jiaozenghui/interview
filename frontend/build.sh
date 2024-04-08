@@ -26,7 +26,7 @@ fi
 
 rm -f /usr/local/nginx/conf/nginx.conf
 
-sudo cp -v  -f default.conf /usr/local/nginx/conf/nginx.conf
+sudo cp  -f default.conf /usr/local/nginx/conf/nginx.conf
 if [ $? -eq 0 ];then
    echo "cp -R nginx.conf OK"
    cd ..
