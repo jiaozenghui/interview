@@ -1,4 +1,5 @@
 # npm install
+rm -rf dist
 npm i
 if [ $? -eq 0 ];then
    echo "yarn OK"
@@ -13,8 +14,9 @@ if [ $? -eq 0 ];then
 else
    exit 
 fi
-rm -rf ../dist/*
-cp -R dist/* ../../../dist/
+rm -rf ../../../dist
+makedir ../../../dist
+cp -R dist/* ../../../dist
 if [ $? -eq 0 ];then
    echo "cp dist OK"
    cd ..
